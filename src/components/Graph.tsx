@@ -20,7 +20,79 @@ export default function Graph({ equation, userEquation }: GraphProps) {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Fixed Equation
+        //#region Graph
+        const scale = 40; // pixels per unit
+
+        // Background
+        ctx.fillStyle = "#f8f8f8";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Small grid lines
+        ctx.strokeStyle = "#eeeeee";
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i <= canvas.width; i += scale / 5) {
+        ctx.beginPath();
+        // x axis
+        ctx.moveTo(i-scale*0.15, 0);
+        ctx.lineTo(i-scale*0.15, canvas.height);
+
+        //y axis
+        ctx.moveTo(0, i-scale*0.55);
+        ctx.lineTo(canvas.width, i-scale*0.55);
+        ctx.strokeStyle = "#d0d0d0";
+
+        ctx.stroke();
+        }
+
+        // Big grid lines
+        for (let i = 0; i <= canvas.width; i += scale) {
+        ctx.beginPath();
+        // x axis
+        ctx.moveTo(i-scale*0.15, 0);
+        ctx.lineTo(i-scale*0.15, canvas.height);
+
+        //y axis
+        ctx.moveTo(0, i-scale*0.55);
+        ctx.lineTo(canvas.width, i-scale*0.55);
+        ctx.stroke();
+        ctx.strokeStyle = "#f7b6e1";
+        }
+
+        // Axis
+
+        ctx.strokeStyle = "#444";
+        ctx.lineWidth = 2;
+
+        // X axis
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+
+        // Y axis
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.stroke();
+
+        // Numbers
+        ctx.font = "12px Arial";
+        ctx.fillStyle = "black";
+
+        for (let i = Math.floor((-window.innerWidth/scale)/2); i <= (window.innerWidth/scale)/2; i++) {
+            if (i === 0) continue;
+
+            // x-axis labels
+            const x = canvas.width / 2 + i * scale;
+            ctx.fillText(i.toString(), x - 4, canvas.height / 2 + 15);
+
+            // y-axis labels
+            const y = canvas.height / 2 - i * scale;
+            ctx.fillText(i.toString(), canvas.width / 2 + 6, y + 4);
+        }
+        //#endregion
+
         //#region Fixed Stroke
         const expr = compile(equation);
 
@@ -41,7 +113,6 @@ export default function Graph({ equation, userEquation }: GraphProps) {
         ctx.stroke();
         //#endregion
 
-        // User Equation
         //#region User Stroke
         let userExpr;
 
@@ -71,6 +142,6 @@ export default function Graph({ equation, userEquation }: GraphProps) {
     }, [equation, userEquation]);
 
     return <div className="d-flex justify-content-center">
-    <canvas ref={canvasRef} width={800} height={600} className="border border-dark"></canvas>
+    <canvas ref={canvasRef} width={window.innerWidth*0.75} height={window.innerHeight*0.6} className="border border-dark"></canvas>
     </div>
 }
