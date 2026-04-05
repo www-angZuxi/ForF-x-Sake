@@ -95,7 +95,7 @@ export default function Graph({ equation, userEquation }: GraphProps) {
 
         //#region Fixed Stroke
         const expr = compile(equation);
-
+        
         ctx.strokeStyle = userEquation.toLowerCase().replaceAll("y=", "")==equation?"lightgreen":"red";
         ctx.lineWidth = 2;
         ctx.beginPath();

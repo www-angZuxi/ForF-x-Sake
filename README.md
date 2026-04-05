@@ -11,15 +11,15 @@ npm i mathjs
 
 ## Core gameplay
 
-Target Equation has to change after user solves successfully
+Game only accepts one answer, sometimes multiple answers should be allowed
 
-Canvas has to display graph points for user's reference ✅
+Target Equation has to change after user solves successfully✅
 
 Need to connect a DB to store target equations, and maybe user profiles in the future
 
 ## Styling
 
-ANY styling change would be better than the plain structure i have right now 😭
+ANY styling change would be better than the basic structure i have right now 😭
 
 ## Extras/Secondary features (After fundamental features have been implemented)
 
