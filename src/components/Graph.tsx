@@ -17,10 +17,10 @@ function Graph({ equation, userEquation }: GraphProps) {
 
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
-
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        //#region Graphlines
+        //#region Graph Lines
         const scale = 40; // pixels per unit
 
         // Makes up the difference for different canvas dimnesions
@@ -53,9 +53,6 @@ function Graph({ equation, userEquation }: GraphProps) {
 
         // Big grid lines
         for (let i = 0; i <= canvas.width; i += scale) {
-
-            console.log(Math.ceil((canvas.width/2)/scale)*scale, canvas.width/2);
-
 
             ctx.beginPath();
             // x axis
@@ -152,8 +149,8 @@ function Graph({ equation, userEquation }: GraphProps) {
 
     }, [equation, userEquation]);
 
-    return <div className="d-flex justify-content-center">
-    <canvas ref={canvasRef} width={window.innerWidth*0.75} height={window.innerHeight*0.6} className="border border-dark"></canvas>
+    return <div className="mr-5">
+    <canvas ref={canvasRef} width={window.innerWidth*0.6} height={window.innerHeight*0.6} className="ml-5"></canvas>
     </div>
 }
 
